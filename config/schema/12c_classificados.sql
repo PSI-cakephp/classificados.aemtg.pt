@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `adds` (
   `price` float NOT NULL,
   `description` varchar(255) NOT NULL,
   `average_rating` varchar(50) NOT NULL,
-  `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   `modified` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   `user_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `id` int(11) NOT NULL,
   `link` varchar(255) NOT NULL,
   `adds_id` int(11) NOT NULL,
-  `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   `modified` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `rates` (
   `rating` int(11) NOT NULL,
   `rated` int(11) NOT NULL,
   `rate` int(11) NOT NULL,
-  `created` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `created` timestamp(6) NOT NULL DEFAULT '0000-00-00 00:00:00.000000',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
