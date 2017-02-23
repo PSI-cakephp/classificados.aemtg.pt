@@ -3,8 +3,8 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 22-Fev-2017 às 21:35
--- Versão do servidor: 5.7.14
+-- Generation Time: Feb 23, 2017 at 09:51 AM
+-- Server version: 5.7.14
 -- PHP Version: 7.0.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -25,7 +25,7 @@ USE `12c_classificados`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `adds`
+-- Table structure for table `adds`
 --
 
 CREATE TABLE `adds` (
@@ -44,7 +44,7 @@ CREATE TABLE `adds` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -53,12 +53,13 @@ CREATE TABLE `categories` (
   `icon` varchar(250) DEFAULT NULL,
   `parent` int(11) DEFAULT NULL,
   `selectable` tinyint(1) NOT NULL DEFAULT '0'
+  `selectable` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `images`
+-- Table structure for table `images`
 --
 
 CREATE TABLE `images` (
@@ -72,7 +73,7 @@ CREATE TABLE `images` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `rates`
+-- Table structure for table `rates`
 --
 
 CREATE TABLE `rates` (
@@ -86,7 +87,7 @@ CREATE TABLE `rates` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -137,7 +138,10 @@ ALTER TABLE `rates`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `username` (`username`),
+  ADD UNIQUE KEY `mobile_number` (`mobile_number`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -152,7 +156,7 @@ ALTER TABLE `adds`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `rates`
 --
