@@ -27,6 +27,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="assets/img/favicon.png">
     <!-- Bootstrap CSS -->
+    <?=$this->Html->css('Frontend/bootstrap.min.css')?> 
    <?=$this->Html->css('Frontend/jasny-bootstrap.min.css')?>    
    <?=$this->Html->css('Frontend/jasny-bootstrap.min.css')?>  
     <!-- Material CSS -->
@@ -77,7 +78,7 @@
               <li><a href="login.html"><i class="lnr lnr-enter"></i> Login</a></li>
               <li><a href="signup.html"><i class="lnr lnr-user"></i> Registar</a></li>
               <li class="postadd">
-                <a class="btn btn-danger btn-post" href="post-ads.html"><span class="fa fa-plus-circle"></span> Coloca um Anúncio</a>
+                <a class="btn btn-danger btn-post" href="post-ads.html">Colocar Anúncio</a>
               </li>
             </ul>
           </div>
@@ -127,7 +128,7 @@
         <div class="container">
           <div class="main-text">
             <h1 class="intro-title">Bem Vindo ao Classificados <span style="color: #3498DB">AEMTG</span></h1>
-            <p class="sub-title">Compra e venda de tudo!</p>
+            <p class="sub-title">COMPRA E VENDA DE TUDO!</p>
 
             <!-- Start Search box -->
             <div class="row search-bar">
@@ -172,7 +173,7 @@
                     <i class="fa fa-search"></i>
                   </div>
                   <div class="col-md-3 col-sm-6 search-col">
-                    <button class="btn btn-common btn-search btn-block"><strong>Search</strong></button>
+                    <button class="btn btn-common btn-search btn-block"><strong>Procurar</strong></button>
                   </div>
                 </form>
               </div>
@@ -190,7 +191,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12">
-              <h3 class="section-title">Browse Ads from 8 Categories</h3>
+              <h3 class="section-title">Procure anúncios por categorias!</h3>
             </div>          
             <div class="col-md-3 col-sm-6 col-xs-12">
               <div class="category-box border-1 wow fadeInUpQuick" data-wow-delay="0.3s">
@@ -227,7 +228,7 @@
                       <sapn class="category-counter">3</sapn>
                     </li>
                     <li>
-                      <a href="category.html">View all subcategories →</a>
+                      <a href="category.html">Ver todas as subcategorias →</a>
                     </li>
                   </ul>
                 </div>
@@ -310,7 +311,7 @@
                       <sapn class="category-counter">3</sapn>
                     </li>
                     <li>
-                      <a href="category.html">View all subcategories →</a>
+                      <a href="category.html">Ver todas as subcategorias →</a>
                     </li>
                   </ul>
                 </div>
@@ -389,7 +390,7 @@
                       <sapn class="category-counter">3</sapn>
                     </li>
                     <li>
-                      <a href="category.html">View all subcategories →</a>
+                      <a href="category.html">Ver todas as subcategorias →</a>
                     </li>
                   </ul>
                 </div>
@@ -430,7 +431,7 @@
                       <sapn class="category-counter">3</sapn>
                     </li>
                     <li>
-                      <a href="category.html">View all subcategories →</a>
+                      <a href="category.html">Ver todas as subcategorias →</a>
                     </li>
                   </ul>
                 </div>
@@ -509,7 +510,7 @@
                       <sapn class="category-counter">3</sapn>
                     </li>
                     <li>
-                      <a href="category.html">View all subcategories →</a>
+                      <a href="category.html">Ver todas as subcategorias →</a>
                     </li>
                   </ul>
                 </div>
@@ -525,7 +526,7 @@
         <div class="container">
           <div class="row">
             <div class="col-md-12 wow fadeIn" data-wow-delay="0.5s">
-              <h3 class="section-title">Featured Listings</h3>
+              <h3 class="section-title">Destaques</h3>
               <div id="new-products" class="owl-carousel">
                 <div class="item">
                   <div class="product-item">
@@ -774,56 +775,7 @@
         </div>
       </div>
       <!-- End Services Section -->
-     
-      <!-- Location Section Start -->
-      <section class="location">
-        <div class="container">
-          <div class="row localtion-list">
-            <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInLeft" data-wow-delay="0.5s">
-              <h3 class="title-2"><i class="fa fa-envelope"></i> Subscribe for updates</h3>
-            <form id="subscribe" action="">
-              <p>Join our 10,000+ subscribers and get access to the latest templates, freebies, announcements and resources!</p>
-              <div class="subscribe">
-                <input class="form-control" name="EMAIL" placeholder="Your email here" required="" type="email">
-                <button class="btn btn-common" type="submit">Subscribe</button>
-              </div>
-            </form>
-            </div>
-            <div class="col-md-6 col-sm-6 col-xs-12 wow fadeInRight" data-wow-delay="1s">
-              <h3 class="title-2"><i class="fa fa-search"></i> Popular Searches</h3>
-              <ul class="cat-list col-sm-4">
-                <li> <a href="account-saved-search.html">puppies</a></li>
-                <li> <a href="account-saved-search.html">puppies for sale</a></li>
-                <li> <a href="account-saved-search.html">bed</a></li>
-                <li> <a href="account-saved-search.html">household</a></li>
-                <li> <a href="account-saved-search.html">chair</a></li>
-                <li> <a href="account-saved-search.html">materials</a></li>
-              </ul>
-              <ul class="cat-list col-sm-4">
-                <li> <a href="account-saved-search.html">sofa</a></li>
-                <li> <a href="account-saved-search.html">wanted</a></li>
-                <li> <a href="account-saved-search.html">furniture</a></li>
-                <li> <a href="account-saved-search.html">van</a></li>
-                <li> <a href="account-saved-search.html">wardrobe</a></li>
-                <li> <a href="account-saved-search.html">caravan</a></li>
-
-              </ul>
-              <ul class="cat-list col-sm-4">
-                <li> <a href="account-saved-search.html">for sale</a></li>
-                <li> <a href="account-saved-search.html">free</a></li>
-                <li> <a href="account-saved-search.html">1 bedroom flat</a></li>
-                <li> <a href="account-saved-search.html">photo+video</a></li>
-                <li> <a href="account-saved-search.html">bmw</a></li>
-                <li> <a href="account-saved-search.html">Land </a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-      <!-- Location Section End -->
-
     </div>
-
     <!-- Counter Section Start -->
     <section id="counter">
       <div class="container">
@@ -837,7 +789,7 @@
               </div>
               <div class="desc">
                 <h3 class="counter">12090</h3>
-                <p>Regular Ads</p>
+                <p>Anúncios</p>
               </div>
             </div>
           </div>
@@ -850,7 +802,7 @@
               </div>
               <div class="desc">
                 <h3 class="counter">350</h3>
-                <p>Locations</p>
+                <p>Cidades</p>
               </div>
             </div>
           </div>
@@ -863,7 +815,7 @@
               </div>
               <div class="desc">
                 <h3 class="counter">23453</h3>
-                <p>Reguler Members</p>
+                <p>Utilizadores</p>
               </div>
             </div>
           </div>
@@ -876,7 +828,7 @@
               </div>
               <div class="desc">
                 <h3 class="counter">150</h3>
-                <p>Premium Ads</p>
+                <p>Anúncios Premium</p>
               </div>
             </div>
           </div>
@@ -893,7 +845,7 @@
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-delay="0">
               <div class="widget">
-                <h3 class="block-title">About us</h3>
+                <h3 class="block-title">Sobre nós</h3>
                 <div class="textwidget">
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque lobortis tincidunt est, et euismod purus suscipit quis. Etiam euismod ornare elementum. Sed ex est, consectetur eget facilisis sed, auctor ut purus.</p>
                 </div>
@@ -901,7 +853,7 @@
             </div>
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-delay="0.5">
                         <div class="widget">
-                            <h3 class="block-title">Useful Links</h3>
+                            <h3 class="block-title">Links Úteis</h3>
                             <ul class="menu">
                   <li><a href="#">Home</a></li>
                   <li><a href="#">Categories</a></li>
@@ -916,30 +868,10 @@
                 </ul>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-delay="1s">
-                        <div class="widget">
-                <h3 class="block-title">Latest Tweets</h3>
-                <div class="twitter-content clearfix">
-                  <ul class="twitter-list">
-                    <li class="clearfix">
-                      <span>
-                        Platform to Download and Submit #Bootstrap Templates via @ProductHunt @GrayGrids
-                        <a href="#">http://t.co/cLo2w7rWOx</a>
-                      </span>
-                    </li>
-                    <li class="clearfix">
-                      <span>
-                        Introducing Bootstrap 4 Features: What’s new, What’s gone!
-                        <a href="#">http://t.co/cLo2w7rWOx</a>
-                      </span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-                    </div>
+                    
                     <div class="col-md-3 col-sm-6 col-xs-12 wow fadeIn" data-wow-delay="1.5s">
                         <div class="widget">
-                            <h3 class="block-title">Random Ads</h3>
+                            <h3 class="block-title">Anúncios aleatórios</h3>
                 <ul class="featured-list">
                   <li>
                     <?=$this->Html->image('Frontend/featured/img1.jpg')?>
@@ -991,16 +923,10 @@
                 <div class="row">
                     <div class="col-md-12">
               <div class="site-info pull-left">
-                <p>All copyrights reserved @ 2016 - Designed by <a href="http://graygrids.com">GrayGrids</a></p>
+                <p>Todos os direitos reservados @ 2017 - Realizado por 12ºC</p>
               </div>                        
               <div class="bottom-social-icons social-icon pull-right">  
-                <a class="facebook" target="_blank" href="https://web.facebook.com/GrayGrids"><i class="fa fa-facebook"></i></a> 
-                <a class="twitter" target="_blank" href="https://twitter.com/GrayGrids"><i class="fa fa-twitter"></i></a>
-                <a class="dribble" target="_blank" href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a>
-                <a class="flickr" target="_blank" href="https://www.flickr.com/"><i class="fa fa-flickr"></i></a>
-                <a class="youtube" target="_blank" href="https://youtube.com"><i class="fa fa-youtube"></i></a>
-                <a class="google-plus" target="_blank" href="https://plus.google.com"><i class="fa fa-google-plus"></i></a>
-                <a class="linkedin" target="_blank" href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a>
+                <a class="facebook" target="_blank" href="https://web.facebook.com/GrayGrids"><i class="fa fa-facebook"></i></a>
               </div>
                     </div>
                 </div>
