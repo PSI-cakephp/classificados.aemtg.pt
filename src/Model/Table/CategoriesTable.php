@@ -6,6 +6,7 @@
 
         public function initialize(array $config)
         {
+            $this->addBehavior('Tree');
             //$this->hasMany('Adds');
             //$this->displayField('name');
         }
