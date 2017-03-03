@@ -39,36 +39,36 @@ class UsersController extends AppController
     {
 
         if ($this->request->is('post')) {
-                   $query = $this->Users->find('all',[
-                   'conditions' => [
-                   'username' => $this->request->data['username'],
-                   'status' => 'Ativado']
-            ]);
-            $user = $query->first();
-            $hasher = new DefaultPasswordHasher();
-            $password = $hasher->check($this->request->data['password'], $user->password);
+            $query=$this->Users->findAllByUsernameOrEmail($this->request->data['username'],$this->request->data['username']);
             
-            if ($password) {
-                if (Validation::email($this->request->data['username'])) {
-                    $this->Auth->config('authenticate', [
-                        'Form' => [
-                            'fields' => ['username' => 'email']
-                        ]
-                    ]);
-                    $this->Auth->constructAuthenticate();
-                    $this->request->data['email'] = $this->request->data['username'];
-
-                    unset($this->request->data['username']);
-                }
-
-                $user = $this->Auth->identify();
+            if ($user = $query->first()){
+                if ($user->status == 'Ativado'){
+                    $hasher = new DefaultPasswordHasher();
+                    $password = $hasher->check($this->request->data['password'], $user->password);
                 
-                if ($user) {
-                    $this->Auth->setUser($user);
-                    return $this->redirect($this->Auth->redirectUrl());
-                }
+                    if ($password) {
+                        if (Validation::email($this->request->data['username'])) {
+                            $this->Auth->config('authenticate', [
+                                'Form' => [
+                                    'fields' => ['username' => 'email']
+                                ]
+                            ]);
+                            $this->Auth->constructAuthenticate();
+                            $this->request->data['email'] = $this->request->data['username'];
 
-                $this->Flash->error(__('Invalid username or password, try again'));
+                            unset($this->request->data['username']);
+                        }
+
+                        $user = $this->Auth->identify();
+                        
+                        if ($user) {
+                            $this->Auth->setUser($user);
+                            return $this->redirect($this->Auth->redirectUrl());
+                        }
+
+                        $this->Flash->error(__('Invalid username or password, try again'));
+                    }
+                }
             }
             $this->Flash->error(__('Invalid username or password, try again'));
 
