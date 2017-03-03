@@ -44,18 +44,18 @@
           </ul>
         </li>
         <li>
-         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th')).'Categorias', array('controller' => 'adds', 'action' => '/categorias'), array('escape' => false)) ?>
+         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th')).'Categorias', array('controller' => 'category', 'action' => '/index'), array('escape' => false)) ?>
             <span class="pull-right-container">
              
             </span>
         
         </li>
         <li class="treeview">
-       <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-users')).'Utilizadores', array('controller' => 'adds', 'action' => '/utilizadores'), array('escape' => false)) ?>
+       <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-users')).'Utilizadores', array('controller' => 'users', 'action' => '/index'), array('escape' => false)) ?>
         </li>
 
         <li class="treeview">
-        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-o-up')).'Anúncios Concluídos', array('controller' => 'adds', 'action' => '/concluidos'), array('escape' => false)) ?>
+        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-o-up')).'Anúncios Concluídos', array('controller' => 'concluidos', 'action' => '/index'), array('escape' => false)) ?>
 
             <span class="pull-right-container">
              
@@ -63,13 +63,13 @@
           </a>
         
         <li>
-        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar')).'Calendário', array('controller' => 'adds', 'action' => '/calendario'), array('escape' => false)) ?>
+        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-calendar')).'Calendário', array('controller' => 'calendario', 'action' => '/index'), array('escape' => false)) ?>
             <span class="pull-right-container">
             </span>
           </a>
         </li>
         <li>
-         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-envelope')).'Mensagens', array('controller' => 'adds', 'action' => '/mensagens'), array('escape' => false)) ?>          
+         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-envelope')).'Mensagens', array('controller' => 'mensagens', 'action' => '/index'), array('escape' => false)) ?>          
             <span class="pull-right-container">
             </span>
           </a>
