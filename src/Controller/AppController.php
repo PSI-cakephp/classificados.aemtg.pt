@@ -43,6 +43,16 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => 'Adds',
+                'action'     => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action'     => 'login'
+            ]
+        ]);
 
         /*
          * Enable the following components for recommended CakePHP security settings.
@@ -50,6 +60,10 @@ class AppController extends Controller
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+    }
+        public function beforeFilter(Event $event)
+    {
+        $this->Auth->userScope = array('User.Ativado'=>0);
     }
 
     /**
