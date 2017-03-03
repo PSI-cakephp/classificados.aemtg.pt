@@ -7,13 +7,16 @@ use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
 use App\Controller\AppController;
 use Cake\Event\Event;
+use Cake\Validation\Validation;
+use Cake\Auth\DefaultPasswordHasher;
+
 
 class UsersController extends AppController
 {
-
-    public function initialize()
+    public function beforeFilter(Event $event)
     {
-        parent::initialize();
+        parent::beforeFilter($event);
+        $this->Auth->allow('Register');
     }
 
 	public function Register()
@@ -30,5 +33,45 @@ class UsersController extends AppController
     	}
         $this->set('user',$user);
 
+    }
+
+    public function Login()
+    {
+
+        if ($this->request->is('post')) {
+                   $query = $this->Users->find('all',[
+                   'conditions' => [
+                   'username' => $this->request->data['username'],
+                   'status' => 'Ativado']
+            ]);
+            $user = $query->first();
+            $hasher = new DefaultPasswordHasher();
+            $password = $hasher->check($this->request->data['password'], $user->password);
+            
+            if ($password) {
+                if (Validation::email($this->request->data['username'])) {
+                    $this->Auth->config('authenticate', [
+                        'Form' => [
+                            'fields' => ['username' => 'email']
+                        ]
+                    ]);
+                    $this->Auth->constructAuthenticate();
+                    $this->request->data['email'] = $this->request->data['username'];
+
+                    unset($this->request->data['username']);
+                }
+
+                $user = $this->Auth->identify();
+                
+                if ($user) {
+                    $this->Auth->setUser($user);
+                    return $this->redirect($this->Auth->redirectUrl());
+                }
+
+                $this->Flash->error(__('Invalid username or password, try again'));
+            }
+            $this->Flash->error(__('Invalid username or password, try again'));
+
+        }
     }
 }
