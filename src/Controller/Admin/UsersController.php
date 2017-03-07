@@ -43,5 +43,44 @@ class UsersController extends AppController
   		$query = $this->Users->find('all');
         $this->set('users',$this->paginate($query));
     }
+
+    //Função que irá inserir o utilizador editado na base de dados
+    public function edit($id)
+    {
+    	$user = $this->Users->get($id);
+        if($this->request->is('put'))
+        {
+            $entidade = $this->Users->patchEntity($user,$this->request->data());
+            $this->Users->save($entidade);
+            $this->redirect(['controller'=>'Users','action'=>'listar']);
+        }
+        $this->set('user',$user);
+    }
+
+    //Função que elimina o utilizador selecionado pelo ID
+    public function delete($id)
+    {
+    	$user = $this->Users->get($id);
+        $this->Users->delete($user,$this->request->data());
+        $this->redirect(['controller'=>'/users','action'=>'list']);
+    }
+
+    //Função que irá bloquear o utilizador na base de dados
+    public function bloquear($id)
+    {
+    	$user = $this->Users->get($id);
+    	$user->status ="Bloqueado";
+    	$this->Users->save($user);
+    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    }
+
+    //Função que irá desbloquear o utilizador na base de dados
+    public function ativar($id)
+    {
+    	$user = $this->Users->get($id);
+    	$user->status ="Ativado";
+    	$this->Users->save($user);
+    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    }
   
 }
