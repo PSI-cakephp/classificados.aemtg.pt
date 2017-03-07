@@ -8,7 +8,7 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
     <?=$this->Html->css('backend/bootstrap.min.css')?>
-  
+
   <!-- Font Awesome -->
     <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')?>
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">-->
@@ -16,25 +16,25 @@
 
  <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
   <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
-   
-  
+
+
   <!-- Theme style -->
   <?=$this->Html->css('backend/AdminLTE.min.css')?>
- 
 
-    
+
+
   <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
-  
+
   <!-- iCheck -->
 
-      
+
          <?=$this->Html->css('backend/plugins/iCheck/flat/blue.css')?>
   <!-- Morris chart -->
      <?=$this->Html->css('backend/plugins/morris/morris.css')?>
 
   <!-- jvectormap -->
    <?=$this->Html->css('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>
- 
+
   <!-- Date Picker -->
      <?=$this->Html->css('backend/plugins/datepicker/datepicker3.css')?>
 
@@ -80,7 +80,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!--  <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">!-->
-                        
+
                       </div>
                       <h4>
                         Support Team
@@ -322,7 +322,7 @@
       <div class="user-panel">
         <div class="pull-left image">
    <!--       <img src="img/backend/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-      <?=$this->Html->image('backend/user2-160x160.jpg', ['class' => "img-circle"])?> 
+      <?=$this->Html->image('backend/user2-160x160.jpg', ['class' => "img-circle"])?>
         </div>
         <div class="pull-left info">
           <p>Alexander Pierce</p>
@@ -355,38 +355,40 @@
             <li><a href="#"><i class="fa fa-refresh"></i> Troca</a></li>
             <li><a href="#"><i class="fa fa-euro"></i> Venda</a></li>
             <li><a href="#"><i class="fa fa-search"></i> Procura</a></li>
-      
+
           </ul>
         </li>
         <li>
-          <a href="#">
-            <i class="fa fa-th"></i> <span>Categorias</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span>
-          </a>
+          <?=$this->Html->link(
+              '<i class="fa fa-th"></i>
+              <span>Categorias</span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-green">new</small>
+              </span>',
+              ['controller'=>'Categories'],
+              ['escape' => false])?>
         </li>
         <li class="treeview">
           <a href="#">
            <i class="fa fa-users"></i>
             <span>Utilizadores</span>
-        
-           
-          
+
+
+
           </a>
-        
+
         </li>
         <li class="treeview">
           <a href="#">
               <i class="fa fa-thumbs-o-up"></i>
             <span>Anúncios Concluídos</span>
             <span class="pull-right-container">
-             
+
             </span>
           </a>
-        
+
         </li>
-    
+
       <!--
         <li class="treeview">
           <a href="#">
@@ -431,10 +433,10 @@
             <li><a href="https://trello.com/12c"><i class="fa fa-trello"></i>Trello</a></li>
             <li><a href="pages/examples/profile.html"><i class="fa fa-github-alt"></i>Github</a></li>
             <li><a href="http://10.113.146.25/classificados.aemtg.pt/"><i class="fa fa-link"></i>Classificados AEMTG</a></li>
-           
+
           </ul>
         </li>
-        <!-- 
+        <!--
         <li class="treeview">
           <a href="#">
             <i class="fa fa-share"></i> <span>Multilevel</span>
@@ -488,6 +490,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+        <?=$this->fetch('content');?>
       <h1>
         Dashboard
         <small>Painel de Controlo</small>
