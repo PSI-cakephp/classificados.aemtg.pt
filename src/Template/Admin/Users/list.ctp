@@ -112,18 +112,18 @@
               </div>
               <div class="modal-body">
                 <?php
-		        	echo $this->Form->create($user);
-		        	echo $this->Form->input('username', ['type' => 'text','class'=>'form-control']);
-		        	echo $this->Form->input('email', ['type' => 'email','class'=>'form-control']);
-		        	echo $this->Form->input('status', ['type' => 'text','class'=>'form-control']);
-		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control']);
-		        	echo $this->Form->end();
-	        	?>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
-                <?=$this->Html->link(__('Editar'),'/admin/users/edit/'.$user['id'],['class' => 'btn btn-primary btn-lg'])?>
-              </div>
+    		        	echo $this->Form->create($user,['url'=>'/admin/users/edit/'.$user['id']]);
+    		        	echo $this->Form->input('username', ['type' => 'text','class'=>'form-control']);
+    		        	echo $this->Form->input('email', ['type' => 'email','class'=>'form-control']);
+    		        	echo $this->Form->input('status', ['type' => 'text','class'=>'form-control']);
+    		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control']);
+                  echo "</div>";
+                  echo '<div class="modal-footer">';
+                  echo '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>';
+                  echo $this->Form->button('Salvar',['type' => 'submit','class' => 'btn btn-primary btn-lg']);
+                  echo "</div>";
+                  echo $this->Form->end();
+                ?>
             </div>
             <!-- /.modal-content -->
         </div>
