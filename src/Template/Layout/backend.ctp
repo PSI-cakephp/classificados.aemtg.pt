@@ -11,39 +11,21 @@
   
   <!-- Font Awesome -->
     <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')?>
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">-->
-
-
- <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
-   
-  
-  <!-- Theme style -->
-  <?=$this->Html->css('backend/AdminLTE.min.css')?>
- 
-
-    
-  <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
-  
-  <!-- iCheck -->
-
-      
-         <?=$this->Html->css('backend/plugins/iCheck/flat/blue.css')?>
-  <!-- Morris chart -->
+    <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
+    <!-- Theme style -->
+    <?=$this->Html->css('backend/AdminLTE.min.css')?>
+    <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
+    <!-- iCheck -->
+    <?=$this->Html->css('backend/plugins/iCheck/flat/blue.css')?>
+    <!-- Morris chart -->
      <?=$this->Html->css('backend/plugins/morris/morris.css')?>
-
-  <!-- jvectormap -->
-   <?=$this->Html->css('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>
- 
-  <!-- Date Picker -->
-     <?=$this->Html->css('backend/plugins/datepicker/datepicker3.css')?>
-
-  <!-- Daterange picker -->
+    <!-- jvectormap -->
+    <?=$this->Html->css('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>
+    <!-- Date Picker -->
+    <?=$this->Html->css('backend/plugins/datepicker/datepicker3.css')?>
+    <!-- Daterange picker -->
     <?=$this->Html->css('backend/plugins/daterangepicker/daterangepicker.css')?>
-
     <?=$this->Html->css('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>
-
-
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -62,7 +44,6 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -80,7 +61,6 @@
                     <a href="#">
                       <div class="pull-left">
                         <!--  <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">!-->
-                        
                       </div>
                       <h4>
                         Support Team
@@ -318,15 +298,10 @@
  <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->element('menu');?>
-        <?= $this->fetch('content') ?>
-
     </div>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-   
-
     <!-- Main content -->
     <?=$this->fetch('content')?>
     <!-- /.content -->
