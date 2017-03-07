@@ -37,7 +37,7 @@ class UsersController extends AppController
 
     public function Login()
     {
-
+        $this->viewBuilder()->layout('login');   
         if ($this->request->is('post')) {
             $query=$this->Users->findAllByUsernameOrEmail($this->request->data['username'],$this->request->data['username']);
             
