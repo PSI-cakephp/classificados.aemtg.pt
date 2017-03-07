@@ -55,7 +55,7 @@
         </li>
 
         <li class="treeview">
-        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-o-up')).'Anúncios Concluídos', array('controller' => 'concluidos', 'action' => '/index'), array('escape' => false)) ?>
+        <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-thumbs-o-up')).'Anúncios Concluídos', array('controller' => 'completed', 'action' => '/index'), array('escape' => false)) ?>
 
             <span class="pull-right-container">
              
