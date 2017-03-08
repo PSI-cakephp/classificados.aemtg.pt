@@ -52,7 +52,7 @@ class UsersController extends AppController
         {
             $entidade = $this->Users->patchEntity($user,$this->request->data());
             $this->Users->save($entidade);
-            $this->redirect(['controller'=>'Users','action'=>'listar']);
+            $this->redirect(['controller'=>'/users','action'=>'list']);
         }
         $this->set('user',$user);
     }
