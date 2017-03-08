@@ -1,18 +1,28 @@
 <?php
+namespace App\Controller\Admin;
 
-namespace App\Controller;
-
+use App\Controller\AppController;
 use Cake\Utility\Text;
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
 
 class CategoriesController extends AppController
 {
-    public function view(){
-        $categories = TableRegistry::get('Categories');
-        $categories->recover();
-        $list = $categories->find('treeList');
-        $this->set('list',$list);   //encontra e define as categorias
+
+    public function initialize()
+    {
+        // loads backend template to all methods
+		$this->viewBuilder()->layout('backend');
+    }
+
+    public function index(){
+        //die(debug($this->Categories->getSectionTree()));
+        $categories = $this->Categories->getSectionTree();
+        //$categories = TableRegistry::get('Categories');
+        //$categories->recover();
+        //$list = $categories->find('treeList',['spacer' => '<i>&nbsp;&nbsp;','valuePath' => 'name','keyPath'=>'icon']);
+        //die(debug($categories->find('treeList')));
+        $this->set('list',$categories);   //encontra e define as categorias
     }
 
     public function add(){

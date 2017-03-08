@@ -51,10 +51,27 @@ CREATE TABLE `categories` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `icon` varchar(250) DEFAULT NULL,
-  `parent` int(11) DEFAULT NULL,
+  `parent_id` int(11) DEFAULT NULL,
+  `lft` int(11) DEFAULT NULL,
+  `rgth` int(11) DEFAULT NULL,
+  `rght` int(11) NOT NULL,
   `selectable` tinyint(1) NOT NULL DEFAULT '0'
-  `selectable` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `icon`, `parent_id`, `lft`, `rgth`, `rght`, `selectable`) VALUES
+(14, 'Automoveis', 'categories_icon/img-1.png', NULL, 1, 4, 4, 0),
+(15, 'Motores', NULL, 14, 2, 3, 3, 1),
+(17, 'telemoveis e tablets', 'categories_icon/img-3.png', NULL, 5, 10, 10, 0),
+(23, 'tablets', NULL, 17, 6, 7, 7, 1),
+(24, 'telemoveis', NULL, 17, 8, 9, 9, 1),
+(25, 'tecnologia', 'categories_icon/img-2.png', NULL, 11, 16, 16, 0),
+(26, 'computadores', NULL, 25, 12, 13, 13, 1),
+(27, 'eletronica', NULL, 25, 14, 15, 15, 1);
+
 
 -- --------------------------------------------------------
 
@@ -120,7 +137,8 @@ ALTER TABLE `adds`
 -- Indexes for table `categories`
 --
 ALTER TABLE `categories`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `name` (`name`);
 
 --
 -- Indexes for table `images`
@@ -156,7 +174,7 @@ ALTER TABLE `adds`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `rates`
 --
