@@ -38,7 +38,7 @@ class UsersController extends AppController
         // loads backend template to all methods
 		$this->viewBuilder()->layout('backend');    }
 	
-	public function list()
+	public function listall()
   	{
   		$query = $this->Users->find('all');
         $this->set('users',$this->paginate($query));

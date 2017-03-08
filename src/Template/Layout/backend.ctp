@@ -11,39 +11,21 @@
 
   <!-- Font Awesome -->
     <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')?>
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">-->
-
-
- <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css"> -->
-
-
-  <!-- Theme style -->
-  <?=$this->Html->css('backend/AdminLTE.min.css')?>
-
-
-
-  <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
-
-  <!-- iCheck -->
-
-
-         <?=$this->Html->css('backend/plugins/iCheck/flat/blue.css')?>
-  <!-- Morris chart -->
+    <?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
+    <!-- Theme style -->
+    <?=$this->Html->css('backend/AdminLTE.min.css')?>
+    <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
+    <!-- iCheck -->
+    <?=$this->Html->css('backend/plugins/iCheck/flat/blue.css')?>
+    <!-- Morris chart -->
      <?=$this->Html->css('backend/plugins/morris/morris.css')?>
-
-  <!-- jvectormap -->
-   <?=$this->Html->css('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>
-
-  <!-- Date Picker -->
-     <?=$this->Html->css('backend/plugins/datepicker/datepicker3.css')?>
-
-  <!-- Daterange picker -->
+    <!-- jvectormap -->
+    <?=$this->Html->css('backend/plugins/jvectormap/jquery-jvectormap-1.2.2.css')?>
+    <!-- Date Picker -->
+    <?=$this->Html->css('backend/plugins/datepicker/datepicker3.css')?>
+    <!-- Daterange picker -->
     <?=$this->Html->css('backend/plugins/daterangepicker/daterangepicker.css')?>
-
     <?=$this->Html->css('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>
-
-
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -62,7 +44,6 @@
       <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
         <span class="sr-only">Toggle navigation</span>
       </a>
-
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
@@ -80,7 +61,6 @@
                     <a href="#">
                       <div class="pull-left">
                         <!--  <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">!-->
-
                       </div>
                       <h4>
                         Support Team
@@ -315,204 +295,12 @@
     </nav>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
-<<<<<<< HEAD
-  <aside class="main-sidebar">
-    <!-- sidebar: style can be found in sidebar.less -->
-    <section class="sidebar">
-      <!-- Sidebar user panel -->
-      <div class="user-panel">
-        <div class="pull-left image">
-   <!--       <img src="img/backend/user2-160x160.jpg" class="img-circle" alt="User Image"> -->
-      <?=$this->Html->image('backend/user2-160x160.jpg', ['class' => "img-circle"])?>
-        </div>
-        <div class="pull-left info">
-          <p>Alexander Pierce</p>
-          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-        </div>
-      </div>
-      <!-- search form -->
-      <form action="#" method="get" class="sidebar-form">
-        <div class="input-group">
-          <input type="text" name="q" class="form-control" placeholder="Pesquisar...">
-              <span class="input-group-btn">
-                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-                </button>
-              </span>
-        </div>
-      </form>
-      <!-- /.search form -->
-      <!-- sidebar menu: : style can be found in sidebar.less -->
-      <ul class="sidebar-menu">
-        <li class="header">Menu</li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Anúncios</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-refresh"></i> Troca</a></li>
-            <li><a href="#"><i class="fa fa-euro"></i> Venda</a></li>
-            <li><a href="#"><i class="fa fa-search"></i> Procura</a></li>
-
-          </ul>
-        </li>
-        <li>
-          <?=$this->Html->link(
-              '<i class="fa fa-th"></i>
-              <span>Categorias</span>
-              <span class="pull-right-container">
-                <small class="label pull-right bg-green">new</small>
-              </span>',
-              ['controller'=>'Categories'],
-              ['escape' => false])?>
-        </li>
-        <li class="treeview">
-          <a href="#">
-           <i class="fa fa-users"></i>
-            <span>Utilizadores</span>
-
-
-
-          </a>
-
-        </li>
-        <li class="treeview">
-          <a href="#">
-              <i class="fa fa-thumbs-o-up"></i>
-            <span>Anúncios Concluídos</span>
-            <span class="pull-right-container">
-
-            </span>
-          </a>
-
-        </li>
-
-      <!--
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-table"></i> <span>Tables</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/tables/simple.html"><i class="fa fa-circle-o"></i> Simple tables</a></li>
-            <li><a href="pages/tables/data.html"><i class="fa fa-circle-o"></i> Data tables</a></li>
-          </ul>
-        </li>
-        -->
-        <li>
-          <a href="pages/calendar.html">
-            <i class="fa fa-calendar"></i> <span>Calendário</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-red">3</small>
-              <small class="label pull-right bg-blue">17</small>
-            </span>
-          </a>
-        </li>
-        <li>
-          <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mensagens</span>
-            <span class="pull-right-container">
-              <small class="label pull-right bg-yellow">12</small>
-              <small class="label pull-right bg-green">16</small>
-              <small class="label pull-right bg-red">5</small>
-            </span>
-          </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-bars"></i> <span>Links</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="https://trello.com/12c"><i class="fa fa-trello"></i>Trello</a></li>
-            <li><a href="pages/examples/profile.html"><i class="fa fa-github-alt"></i>Github</a></li>
-            <li><a href="http://10.113.146.25/classificados.aemtg.pt/"><i class="fa fa-link"></i>Classificados AEMTG</a></li>
-
-          </ul>
-        </li>
-        <!--
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-share"></i> <span>Multilevel</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-            <li>
-              <a href="#"><i class="fa fa-circle-o"></i> Level One
-                <span class="pull-right-container">
-                  <i class="fa fa-angle-left pull-right"></i>
-                </span>
-              </a>
-              <ul class="treeview-menu">
-                <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
-                <li>
-                  <a href="#"><i class="fa fa-circle-o"></i> Level Two
-                    <span class="pull-right-container">
-                      <i class="fa fa-angle-left pull-right"></i>
-                    </span>
-                  </a>
-
-
-                  <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
-          </ul>
-        </li>
-        -->
-
-        <!--
-        <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
-        <li class="header">LABELS</li>
-        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
-      </ul>
-    </section>
-    <!-- /.sidebar -->
-  </aside>
-=======
  <?= $this->Flash->render() ?>
     <div class="container clearfix">
         <?= $this->element('menu');?>
-        <?= $this->fetch('content') ?>
->>>>>>> refs/remotes/origin/master
-
     </div>
-
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-<<<<<<< HEAD
-    <section class="content-header">
-        <?=$this->fetch('content');?>
-      <h1>
-        Dashboard
-        <small>Painel de Controlo</small>
-      </h1>
-      <ol class="breadcrumb">
-        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Dashboard</li>
-      </ol>
-    </section>
-=======
-   
->>>>>>> refs/remotes/origin/master
-
     <!-- Main content -->
     <?=$this->fetch('content')?>
     <!-- /.content -->

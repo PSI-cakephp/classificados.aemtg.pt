@@ -1,5 +1,3 @@
- 
- <html>
   <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -51,7 +49,7 @@
         
         </li>
         <li class="treeview">
-       <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-users')).'Utilizadores', array('controller' => 'users', 'action' => '/index'), array('escape' => false)) ?>
+       <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-users')).'Utilizadores', array('controller' => 'users', 'action' => '/listall'), array('escape' => false)) ?>
         </li>
 
         <li class="treeview">
@@ -136,4 +134,3 @@
     </section>
     <!-- /.sidebar -->
   </aside>
-  </html>

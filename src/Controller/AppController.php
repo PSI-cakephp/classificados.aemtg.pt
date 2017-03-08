@@ -63,7 +63,7 @@ class AppController extends Controller
     }
         public function beforeFilter(Event $event)
     {
-        $this->Auth->userScope = array('User.Ativado'=>0);
+       // $this->Auth->userScope = array('User.Ativado'=>0);
     }
 
     /**
