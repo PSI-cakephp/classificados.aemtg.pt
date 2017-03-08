@@ -26,6 +26,7 @@
     <!-- Daterange picker -->
     <?=$this->Html->css('backend/plugins/daterangepicker/daterangepicker.css')?>
     <?=$this->Html->css('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>
+    <?=$this->Html->css('backend/plugins/datatables/dataTables.bootstrap.css')?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
