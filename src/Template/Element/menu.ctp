@@ -42,7 +42,7 @@
           </ul>
         </li>
         <li>
-         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th')).'Categorias', array('controller' => 'category', 'action' => '/index'), array('escape' => false)) ?>
+         <?= $this->Html->link($this->Html->tag('i', '', array('class' => 'fa fa-th')).'Categorias', array('controller' => 'categories', 'action' => '/index'), array('escape' => false)) ?>
             <span class="pull-right-container">
              
             </span>

@@ -62,7 +62,7 @@ class UsersController extends AppController
     {
     	$user = $this->Users->get($id);
         $this->Users->delete($user,$this->request->data());
-        $this->redirect(['controller'=>'/users','action'=>'list']);
+        $this->redirect(['controller'=>'/users','action'=>'listall']);
     }
 
     //Função que irá bloquear o utilizador na base de dados
@@ -71,7 +71,7 @@ class UsersController extends AppController
     	$user = $this->Users->get($id);
     	$user->status ="Bloqueado";
     	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    	$this->redirect(['controller'=>'/users','action'=>'listall']);
     }
 
     //Função que irá desbloquear o utilizador na base de dados
@@ -80,7 +80,7 @@ class UsersController extends AppController
     	$user = $this->Users->get($id);
     	$user->status ="Ativado";
     	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    	$this->redirect(['controller'=>'/users','action'=>'listall']);
     }
   
 }
