@@ -1,4 +1,5 @@
 <?php
+namespace App\Controller\Admin;
 /**
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -17,71 +18,105 @@ use Cake\Core\Configure;
 use Cake\Network\Exception\ForbiddenException;
 use Cake\Network\Exception\NotFoundException;
 use Cake\View\Exception\MissingTemplateException;
-
-namespace App\Controller\Admin;
-
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\Validation\Validation;
+use Cake\Auth\DefaultPasswordHasher;
 
-/**
- * Static content controller
- *
- * This controller will render views from Template/Adds/
- *
- */
+
 class UsersController extends AppController
-{
-	public $paginate = [
-        'limit' => 20
-    ];
+{    
+
+  public $components = array('Auth');
+  
+  public $paginate = [
+    'limit' => 20
+   ];
+  
+  public function beforeFilter(Event $event)
+  {
+    parent::beforeFilter($event);
+    $this->Auth->allow(['logout']);
+  }
+  
 	public function initialize()
-    {
+  {
         // loads backend template to all methods
-		$this->viewBuilder()->layout('backend');    }
+		$this->viewBuilder()->layout('backend');    
+  }
 	
 	public function listall()
-  	{
-  		$query = $this->Users->find('all');
-        $this->set('users',$this->paginate($query));
-    }
+  {
+    $query = $this->Users->find('all');
+    $this->set('users',$this->paginate($query));
+  }
 
-    //Função que irá inserir o utilizador editado na base de dados
-    public function edit($id)
+  //Função que irá inserir o utilizador editado na base de dados
+  public function edit($id)
+  {
+    $user = $this->Users->get($id);
+    if($this->request->is('put'))
     {
-    	$user = $this->Users->get($id);
-        if($this->request->is('put'))
-        {
-            $entidade = $this->Users->patchEntity($user,$this->request->data());
-            $this->Users->save($entidade);
-            $this->redirect(['controller'=>'/users','action'=>'list']);
-        }
-        $this->set('user',$user);
+      $entidade = $this->Users->patchEntity($user,$this->request->data());
+      $this->Users->save($entidade);
+      $this->redirect(['controller'=>'/users','action'=>'list']);
     }
+    $this->set('user',$user);
+  }
 
-    //Função que elimina o utilizador selecionado pelo ID
-    public function delete($id)
-    {
-    	$user = $this->Users->get($id);
-        $this->Users->delete($user,$this->request->data());
-        $this->redirect(['controller'=>'/users','action'=>'listall']);
-    }
+  //Função que elimina o utilizador selecionado pelo ID
+  public function delete($id)
+  {
+    $user = $this->Users->get($id);
+    $this->Users->delete($user,$this->request->data());
+    $this->redirect(['controller'=>'/users','action'=>'listall']);
+  }
 
-    //Função que irá bloquear o utilizador na base de dados
-    public function bloquear($id)
-    {
-    	$user = $this->Users->get($id);
-    	$user->status ="Bloqueado";
-    	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'listall']);
-    }
+  //Função que irá bloquear o utilizador na base de dados
+  public function bloquear($id)
+  {
+  	$user = $this->Users->get($id);
+  	$user->status ="Bloqueado";
+   	$this->Users->save($user);
+   	$this->redirect(['controller'=>'/users','action'=>'listall']);   
+  }
 
-    //Função que irá desbloquear o utilizador na base de dados
-    public function ativar($id)
-    {
-    	$user = $this->Users->get($id);
-    	$user->status ="Ativado";
-    	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'listall']);
-    }
-    
+  //Função que irá desbloquear o utilizador na base de dados
+  public function ativar($id)
+  {
+    $user = $this->Users->get($id);
+    $user->status ="Ativado";
+    $this->Users->save($user);
+   	$this->redirect(['controller'=>'/users','action'=>'listall']);
+  }
   
+  //vai confirmar o email à base de dados e a password e se estiverem corretos da acesso à zona de administração
+  public function login()
+  {
+    $this->viewBuilder()->layout('');  
+    if ($this->request->is('post')) {
+      if (Validation::email($this->request->data['username'])) {
+        $this->Auth->config('authenticate', [
+            'Form' => [
+                'fields' => ['username' => 'email']
+            ]
+        ]);
+        $this->Auth->constructAuthenticate();
+        $this->request->data['email'] = $this->request->data['username'];
+        unset($this->request->data['username']);
+      }
+     
+      $user = $this->Auth->identify();
+      if ($user['user_type']=='admin') {
+        $this->Auth->setUser($user);
+        return $this->redirect($this->Auth->redirectUrl(['controller'=>'/users','action'=>'index']));
+      }          
+    }
+  }
+
+  // 
+  public function logout()
+  {
+    return $this->redirect($this->Auth->logout());
+  }
 }
