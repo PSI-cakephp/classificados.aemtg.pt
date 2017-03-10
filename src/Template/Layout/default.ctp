@@ -75,8 +75,14 @@
           <!-- Navbar Start -->
           <div class="collapse navbar-collapse" id="navbar">
             <ul class="nav navbar-nav navbar-right">
-              <li><?=$this->Html->link('<i class="lnr lnr-enter"></i> login','/users/login', ['escape' => false]);?></li>
+              <?php if ($user = $this->request->session()->read('Auth.User')):?>
+                <li><span style="display:block; padding:7px">User: <?=$user['username']?></span></li>
+                <li><?=$this->Html->link('<i class="lnr lnr-exit"></i> logout','/users/logout', ['escape' => false]);?></li>
+              <?php else: ?>
+                <li><?=$this->Html->link('<i class="lnr lnr-enter"></i> login','/users/login', ['escape' => false]);?></li>
+              
               <li><?=$this->Html->link('<i class="lnr lnr-user"></i> Registar','/users/register', ['escape' => false]);?></li>
+              <?php endif;?>
               <li class="postadd">
                 <a class="btn btn-danger btn-post" href="post-ads.html">Colocar Anúncio</a>
               </li>
