@@ -82,5 +82,6 @@ class UsersController extends AppController
     	$this->Users->save($user);
     	$this->redirect(['controller'=>'/users','action'=>'listall']);
     }
+    
   
 }
