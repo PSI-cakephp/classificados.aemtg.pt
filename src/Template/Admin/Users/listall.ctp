@@ -1,18 +1,9 @@
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<!-- Tell the browser to be responsive to screen width -->
-<?=$this->Html->css('backend/bootstrap.min.css')?>
-<?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')?>
-<?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
-<?=$this->Html->css('backend/plugins/datatables/dataTables.bootstrap.css')?>
-<?=$this->Html->css('backend/AdminLTE.min.css')?>
-<?=$this->Html->css('backend/skins/_all-skins.min.css')?>
 <section class="content-header">
       <h1>
         Users
       </h1>
 </section>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -112,18 +103,18 @@
               </div>
               <div class="modal-body">
                 <?php
-    		        	echo $this->Form->create($user,['url'=>'/admin/users/edit/'.$user['id']]);
-    		        	echo $this->Form->input('username', ['type' => 'text','class'=>'form-control']);
-    		        	echo $this->Form->input('email', ['type' => 'email','class'=>'form-control']);
-    		        	echo $this->Form->input('status', ['type' => 'text','class'=>'form-control']);
-    		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control']);
-                  echo "</div>";
-                  echo '<div class="modal-footer">';
-                  echo '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>';
-                  echo $this->Form->button('Salvar',['type' => 'submit','class' => 'btn btn-primary btn-lg']);
-                  echo "</div>";
-                  echo $this->Form->end();
-                ?>
+		        	echo $this->Form->create($user);
+		        	echo $this->Form->input('username', ['type' => 'text','class'=>'form-control']);
+		        	echo $this->Form->input('email', ['type' => 'email','class'=>'form-control']);
+		        	echo $this->Form->input('status', ['type' => 'text','class'=>'form-control']);
+		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control']);
+		        	echo $this->Form->end();
+	        	?>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
+                <?=$this->Html->link(__('Editar'),'/admin/users/edit/'.$user['id'],['class' => 'btn btn-primary btn-lg'])?>
+              </div>
             </div>
             <!-- /.modal-content -->
         </div>
@@ -167,6 +158,7 @@
       "autoWidth": false
     });
   });
+
 </script>
 </body>
 </html>

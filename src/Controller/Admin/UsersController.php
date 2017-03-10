@@ -38,7 +38,7 @@ class UsersController extends AppController
         // loads backend template to all methods
 		$this->viewBuilder()->layout('backend');    }
 	
-	public function list()
+	public function listall()
   	{
   		$query = $this->Users->find('all');
         $this->set('users',$this->paginate($query));
@@ -52,7 +52,7 @@ class UsersController extends AppController
         {
             $entidade = $this->Users->patchEntity($user,$this->request->data());
             $this->Users->save($entidade);
-            $this->redirect(['controller'=>'Users','action'=>'listar']);
+            $this->redirect(['controller'=>'/users','action'=>'list']);
         }
         $this->set('user',$user);
     }
@@ -62,7 +62,7 @@ class UsersController extends AppController
     {
     	$user = $this->Users->get($id);
         $this->Users->delete($user,$this->request->data());
-        $this->redirect(['controller'=>'/users','action'=>'list']);
+        $this->redirect(['controller'=>'/users','action'=>'listall']);
     }
 
     //Função que irá bloquear o utilizador na base de dados
@@ -71,7 +71,7 @@ class UsersController extends AppController
     	$user = $this->Users->get($id);
     	$user->status ="Bloqueado";
     	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    	$this->redirect(['controller'=>'/users','action'=>'listall']);
     }
 
     //Função que irá desbloquear o utilizador na base de dados
@@ -80,7 +80,7 @@ class UsersController extends AppController
     	$user = $this->Users->get($id);
     	$user->status ="Ativado";
     	$this->Users->save($user);
-    	$this->redirect(['controller'=>'/users','action'=>'list']);
+    	$this->redirect(['controller'=>'/users','action'=>'listall']);
     }
   
 }
