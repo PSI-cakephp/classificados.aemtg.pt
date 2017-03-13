@@ -26,7 +26,7 @@ use Cake\Event\Event;
  * @link http://book.cakephp.org/3.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller
-{
+{   public $components = array('Auth');
 
     /**
      * Initialization hook method.
@@ -37,35 +37,56 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function initialize()
+
+  
+
+   /* public function initialize()
     {
         parent::initialize();
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
         $this->loadComponent('Auth', [
-            'loginRedirect' => [
-                'controller' => 'Adds',
-                'action'     => 'index'
-            ],
-            'logoutRedirect' => [
-                'controller' => 'Adds',
-                'action'     => 'index'
-            ]
-        ]);
+                'authorize' => ['Controller'],  
+                'loginRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'index'
+                ],
+                'logoutRedirect' => [
+                    'controller' => 'Users',
+                    'action' => 'login'
+                ]
+            ]);
 
+         }
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see http://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+
+   
+
+ public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'loginRedirect' => [
+                'controller' => '/users',
+                'action'     => 'index'
+            ],
+            'logoutRedirect' => [
+                'controller' => 'Users',
+                'action'     => 'login'
+            ]
+        ]);
     }
         public function beforeFilter(Event $event)
-    {
-       // $this->Auth->userScope = array('User.Ativado'=>0);
-    }
-
+        {
+            $this->Auth->allow(['index', 'view', 'display']);
+        }
     /**
      * Before render callback.
      *
@@ -76,7 +97,8 @@ class AppController extends Controller
     {
         if (!array_key_exists('_serialize', $this->viewVars) &&
             in_array($this->response->type(), ['application/json', 'application/xml'])
-        ) {
+        )
+         {
             $this->set('_serialize', true);
         }
     }

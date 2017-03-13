@@ -74,4 +74,9 @@ class UsersController extends AppController
 
         }
     }
+
+    // efetua o logout dos utilizadores
+    public function logout(){
+        return $this->redirect($this->Auth->logout());
+    }
 }

@@ -282,7 +282,8 @@
                   <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <?= $this->Html->link("Sign out",'/admin/users/logout',array('class'=>'btn btn-default btn-flat')); ?>
+                  
                 </div>
               </li>
             </ul>
