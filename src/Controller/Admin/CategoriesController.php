@@ -9,19 +9,23 @@ use Cake\ORM\TableRegistry;
 class CategoriesController extends AppController
 {
 
+    public $paginate = [
+        'limit' => 20
+    ];
+
     public function initialize()
     {
         // loads backend template to all methods
 		$this->viewBuilder()->layout('backend');
+        $this->loadComponent('RequestHandler');
     }
 
     public function index(){
-        //die(debug($this->Categories->getSectionTree()));
+        $category = $this->Categories->find('all');
+        $this->set('category',$this->paginate($category));
+        //$categories = $this->Categories->getSectionTree();
         $categories = $this->Categories->getSectionTree();
-        //$categories = TableRegistry::get('Categories');
-        //$categories->recover();
-        //$list = $categories->find('treeList',['spacer' => '<i>&nbsp;&nbsp;','valuePath' => 'name','keyPath'=>'icon']);
-        //die(debug($categories->find('treeList')));
+        $this->set('categorylist',$categories);
         $this->set('list',$categories);   //encontra e define as categorias
     }
 
@@ -53,13 +57,35 @@ class CategoriesController extends AppController
             }
 
             if($this->Categories->save($category)){ //valida os dados
-                $this->Flash->success('Sucesso');
+                //$this->Flash->success('Sucesso');
                 //faz qualquer coisa
             }
             else{
                 $this->Flash->error('Nao foi possivel guardar'); //envia uma mensagem de erro
             }
         }
+    }
+    public function edit($id)
+    {
+    	$category = $this->Categories->get($id);
+        if($this->request->is('post'))
+        {
+            //die(debug($this->request->data()));
+            $entidade = $this->Categories->patchEntity($category,$this->request->data());
+            $this->Categories->save($entidade);
+            $this->redirect(['controller'=>'/categories']);
+        }
+        $this->set('category',$category);
+    }
+
+    public function getuser(){
+        //$this->autoRender = false;
+        //die(debug($this->request->data));
+        $id = json_decode($this->request->data('id'));
+        $category = $this->Categories->find('all')->where('id = '.$id);
+        $category = json_encode($category);
+
+        $this->set('categoria',$category);
     }
 
 }
