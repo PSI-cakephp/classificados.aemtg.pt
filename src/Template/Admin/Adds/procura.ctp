@@ -11,7 +11,7 @@
 <?=$this->Html->css('backend/skins/_all-skins.min.css')?>
 <section class="content-header">
       <h1>
-        Compra
+       Procura
       </h1>
 </section>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -30,6 +30,8 @@
                   <th>Descrição</th>
                   <th>Ranting</th>
                   <th>Data<th>
+                   <th></th>
+                   <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,8 +42,8 @@
                 		<td><?=$compra['description']?></td>
                 		<td><?=$compra['average_rating']?></td>
                 		<td><?=$compra['created']?></td>
-                    <td><?=$this->Html->link('Editar','',array('class'=>'button'))?></td>
-                    <td><?=$this->Html->link('Eliminar','',array('class'=>'button'));?></td>
+                    <td><?=$this->Html->link('Editar','',array('class'=>'btn btn-primary btn-sm'))?></td>
+                    <td><?=$this->Html->link('Eliminar','',array('class'=>'btn btn-danger btn-sm'));?></td>
                 	</tr>
                 	<?php endforeach;?>
                 </tbody>

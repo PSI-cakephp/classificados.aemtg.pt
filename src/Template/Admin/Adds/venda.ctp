@@ -30,6 +30,8 @@
                   <th>Descrição</th>
                   <th>Ranting</th>
                   <th>Data<th>
+                  <th></th>
+                  <th></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -40,8 +42,8 @@
                 		<td><?=$venda['description']?></td>
                 		<td><?=$venda['average_rating']?></td>
                 		<td><?=$venda['created']?></td>
-                    <td><?=$this->Html->link('Editar','',array('class'=>'button'))?></td>
-                    <td><?=$this->Html->link('Eliminar','',array('class'=>'button'));?></td>
+                    <td><?=$this->Html->link('Editar','',array('class'=>'btn btn-primary btn-sm'))?></td>
+                    <td><?=$this->Html->link('Eliminar','',array('class'=>'btn btn-danger btn-sm'));?></td>
                 	</tr>
                 	<?php endforeach;?>
                 </tbody>
