@@ -59,10 +59,11 @@ class UsersController extends AppController
     {
       $entidade = $this->Users->patchEntity($user,$this->request->data());
       $this->Users->save($entidade);
-      $this->redirect(['controller'=>'/users','action'=>'list']);
+      $this->redirect(['controller'=>'/users','action'=>'listall']);
     }
-    $this->set('user',$user);
+      $this->set('user',$user);
   }
+
 
   //Função que elimina o utilizador selecionado pelo ID
   public function delete($id)
@@ -75,6 +76,7 @@ class UsersController extends AppController
   //Função que irá bloquear o utilizador na base de dados
   public function bloquear($id)
   {
+    $this->autoRender = false;
   	$user = $this->Users->get($id);
   	$user->status ="Bloqueado";
    	$this->Users->save($user);
@@ -84,6 +86,7 @@ class UsersController extends AppController
   //Função que irá desbloquear o utilizador na base de dados
   public function ativar($id)
   {
+    $this->autoRender = false;
     $user = $this->Users->get($id);
     $user->status ="Ativado";
     $this->Users->save($user);

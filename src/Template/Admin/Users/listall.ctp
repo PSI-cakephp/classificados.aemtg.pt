@@ -24,20 +24,23 @@
 	                	<tr>
 	                		<td><?=$user['username']?></td>
 	                		<td><?=$user['email']?></td>
-	                		<td><?=$user['status']?></td>
+	                		<td id="status"><?=$user['status']?></td>
 	                		<td><?=$user['user_type']?></td>
 	                		<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Editar</button></td>
 	                		<td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
+                      <td id="blockbutton">
 	                		<?php if($user['status']=='Ativado')
 		                		{
-		                			echo "<td>".$this->Html->link(__('Bloquear'),'/admin/users/bloquear/'.$user['id'],['class' => 'btn btn-danger btn-sm'])."</td>";
+                          echo '<button type="button" class="btn btn-danger btn-sm bloquear" id="bloquear-'.$user['id'].'" >Bloquear</button>';
+		                			//echo "<td>".$this->Html->link(__('Bloquear'),'/admin/users/bloquear/'.$user['id'],['class' => 'btn btn-danger btn-sm'])."</td>";
 		                		}
 		                		else if($user['status']=='Bloqueado')
 		                		{
-		                			echo "<td>".$this->Html->link(__('Ativar'),'/admin/users/ativar/'.$user['id'],['class' => 'btn btn-success btn-sm'])."</td>";
+                          echo '<button type="button" class="btn btn-success btn-sm ativar" id="ativar-'.$user['id'].'">Ativar</button>';
+		                			//echo "<td>".$this->Html->link(__('Ativar'),'/admin/users/ativar/'.$user['id'],['class' => 'btn btn-success btn-sm'])."</td>";
 		                		}
 		                	?>
-	                		
+	                		</td>
 	                		<td><?=$this->Html->link(__('Reset Password'),'Admin/Users/'.$user['id'],['class' => 'btn btn-info btn-sm'])?></td>
 	                	</tr>
                 	<?php endforeach;?>
@@ -158,6 +161,40 @@
       "autoWidth": false
     });
   });
+
+    $('#blockbutton').on('click','.ativar',function(){
+      myString = $(this).attr("id");
+      myString = myString.replace("ativar-",'');
+      console.log(myString);
+        $.ajax({
+          url: "ativar/"+myString,
+          /*data: {
+                  id:myString
+                },*/
+          success: function()
+          {
+            $('#blockbutton').html('<button type="button" class="btn btn-danger btn-sm bloquear" id="bloquear-'+myString+'" >Bloquear</button>');
+            $('#status').html('Bloqueado');
+          }
+        });
+    });
+
+    $('#blockbutton').on('click','.bloquear',function(){
+      myString = $(this).attr("id");
+      myString = myString.replace("bloquear-",'');
+      console.log(myString);
+        $.ajax({
+          url: "bloquear/"+myString,
+          /*data: {
+                  id:myString
+                },*/
+          success: function()
+          {
+            $('#blockbutton').html('<button type="button" class="btn btn-success btn-sm ativar" id="ativar-'+myString+'">Ativar</button>');
+            $('#status').html('Ativado');
+          }
+        });
+    });
 
 </script>
 </body>
