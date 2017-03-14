@@ -1,18 +1,9 @@
-<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-<!-- Tell the browser to be responsive to screen width -->
-<?=$this->Html->css('backend/bootstrap.min.css')?>
-<?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css')?>
-<?=$this->Html->css('https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css')?>
-<?=$this->Html->css('backend/plugins/datatables/dataTables.bootstrap.css')?>
-<?=$this->Html->css('backend/AdminLTE.min.css')?>
-<?=$this->Html->css('backend/skins/_all-skins.min.css')?>
 <section class="content-header">
       <h1>
         Users
       </h1>
 </section>
-<body class="hold-transition skin-blue sidebar-mini">
-<div class="wrapper">
+
     <!-- Main content -->
     <section class="content">
       <div class="row">
@@ -204,6 +195,7 @@
           }
         });
     });
+
 </script>
 </body>
 </html>

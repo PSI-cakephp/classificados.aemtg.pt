@@ -26,6 +26,7 @@
     <!-- Daterange picker -->
     <?=$this->Html->css('backend/plugins/daterangepicker/daterangepicker.css')?>
     <?=$this->Html->css('backend/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css')?>
+    <?=$this->Html->css('backend/plugins/datatables/dataTables.bootstrap.css')?>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
@@ -281,7 +282,8 @@
                   <a href="#" class="btn btn-default btn-flat">Perfil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                <?= $this->Html->link("Sign out",'/admin/users/logout',array('class'=>'btn btn-default btn-flat')); ?>
+                  
                 </div>
               </li>
             </ul>
