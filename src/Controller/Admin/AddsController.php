@@ -30,7 +30,6 @@ use App\Controller\AppController;
  */
 class AddsController extends AppController
 {
-
 	public function initialize()
     {
         // loads backend template to all methods
@@ -40,5 +39,25 @@ class AddsController extends AppController
   	{
 
     }
-  
+    public function troca()
+    {
+  		$query = $this->Adds->find('all',['order' => ['Adds.created' => 'DESC']] )->where(['type'=> 'Troca']);
+
+ 
+
+        $this->set('trocas',$this->paginate($query));
+    }
+
+
+  public function venda()
+  {
+  	$query = $this->Adds->find('all',['order' => ['Adds.created' => 'DESC']] )->where(['type'=> 'Venda']);
+        $this->set('vendas',$this->paginate($query));
+  }
+  public function compra()
+  {
+    $query = $this->Adds->find('all',['order' => ['Adds.created' => 'DESC']] )->where(['type'=> 'Compra']);
+        $this->set('compras',$this->paginate($query));
+  	
+  }
 }
