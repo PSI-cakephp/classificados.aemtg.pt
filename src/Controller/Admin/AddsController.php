@@ -54,7 +54,7 @@ class AddsController extends AppController
   	$query = $this->Adds->find('all',['order' => ['Adds.created' => 'DESC']] )->where(['type'=> 'Venda']);
         $this->set('vendas',$this->paginate($query));
   }
-  public function compra()
+  public function procura()
   {
     $query = $this->Adds->find('all',['order' => ['Adds.created' => 'DESC']] )->where(['type'=> 'Compra']);
         $this->set('compras',$this->paginate($query));
