@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\Utility\Text;
 use Cake\I18n\I18n;
 use Cake\ORM\TableRegistry;
+use Cake\Utility\Hash;
 
 class CategoriesController extends AppController
 {
@@ -78,11 +79,14 @@ class CategoriesController extends AppController
         $this->set('category',$category);
     }
 
-    public function getuser(){
+    public function getcategory(){
         //$this->autoRender = false;
-        //die(debug($this->request->data));
         $id = json_decode($this->request->data('id'));
         $category = $this->Categories->find('all')->where('id = '.$id);
+        $categories = $this->Categories->find('all')->select(['id', 'name']);
+        $category = $category->toArray();
+        $categories = $categories->toArray();
+        $category['categories'] = $categories;
         $category = json_encode($category);
 
         $this->set('categoria',$category);

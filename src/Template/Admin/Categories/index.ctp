@@ -108,7 +108,7 @@ $body = $("body");
         $('button').click(function(){
             var id = $(this).attr('id').replace('category-', '');
             $.ajax({
-                url: "categories/getuser.json",
+                url: "getcategory.json",
                 dataType: 'json',
                 type: 'post',
                 data: {id:id},
@@ -123,7 +123,7 @@ $body = $("body");
                     //var update = document.getElementById("update");
                     //update.href = 'categories/edit/' + row[0]['id'];
                     var updateform = document.getElementById("formulario");
-                    updateform.action = 'categories/edit/' + row[0]['id'];
+                    updateform.action = 'edit/' + row[0]['id'];
 
 
                     //console.log(row[0]['name']);
