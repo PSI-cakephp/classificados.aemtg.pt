@@ -42,7 +42,8 @@ class UsersController extends AppController
 	public function initialize()
   {
         // loads backend template to all methods
-		$this->viewBuilder()->layout('backend');    
+		$this->viewBuilder()->layout('backend'); 
+    $this->loadComponent('RequestHandler');   
   }
 	
 	public function listall()
@@ -54,6 +55,7 @@ class UsersController extends AppController
   //Função que irá inserir o utilizador editado na base de dados
   public function edit($id)
   {
+
     $user = $this->Users->get($id);
     if($this->request->is('put'))
     {
@@ -122,4 +124,12 @@ class UsersController extends AppController
   {
     return $this->redirect($this->Auth->logout());
   }
+
+  public function getuser(){
+        //$this->autoRender = false;
+        $id = json_decode($this->request->data('id'));
+        $user = $this->Users->find('all')->where('id = '.$id);
+        $user = json_encode($user);
+        $this->set('user',$user);
+    }
 }
