@@ -1,3 +1,4 @@
+<?php use Cake\Routing\Router; ?>
 <section class="content-header">
       <h1>
         Categorias
@@ -29,6 +30,7 @@
               <th>Actions</th>
             </tr>
                 <?php
+                //die(debug($category));
                     foreach ($list as $value) {
 
                         echo '<tr>';
@@ -43,8 +45,9 @@
                                 '<td>&nbsp;&nbsp;'.$value['name'].'</td>
                                 <td></td>';
                         }
-                        echo '<td>'.$this->Html->link('Edit','/admin/categories/edit/'.$value['id'],['class' => 'button']).'&nbsp;'.
-                                  $this->Html->link('Delete','/admin/categories/delete/'.$value['id'],['class' => 'button']).'</td>
+                        echo '<td><button type="button" class="btn btn-primary btn-sm botao" data-toggle="modal"  id="category-'.$value['id'].'">Editar</button>&nbsp;
+                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" id="category-'.$value['id'].'">Eliminar</button>
+                             </td>
                         </tr>';
                     }
                 ?>
@@ -56,3 +59,94 @@
     </div>
   </div>
 </section>
+
+<div class="example-modals">
+    <div class="modal modal-primary" id="modal2" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Editar Categoria</h4>
+              </div>
+              <div class="modal-body">
+                <?php
+                //die(debug($user));
+                    //,'/admin/categories/edit/'
+		        	echo $this->Form->create('categories',['id'=>'formulario','enctype'=>'multipart/form-data']);
+                    echo $this->Form->hidden('id', ['value'=>'','id'=>'id']);
+                    echo $this->Form->input('name', ['type' => 'text','class'=>'form-control','id'=>'nome']);
+                    echo $this->Form->input('parent_id', ['class'=>'form-control']);
+                    echo $this->Form->checkbox('selectable',['id' =>'selecionar']).'&nbsp;Selectable';
+                    echo $this->Form->input('icon', ['type' => 'file','class'=>'form-control']);
+                    echo $this->Html->image('categories_icon/no_logo.gif',['alt' => 'imagem','height' => 50,'id'=>'imagem-edit']);
+                    echo '</div><div class="modal-footer">
+                       <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
+                       '.$this->Form->button(__('Editar'),['class' => 'btn btn-primary btn-lg','id'=>'update']).'
+                     </div>';
+		        	echo $this->Form->end();
+	        	?>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+
+<?=$this->element('loading')?> <!-- mostra o loading -->
+
+<!-- jQuery 2.2.3 -->
+<?=$this->Html->script('backend/plugins/jQuery/jquery-2.2.3.min.js')?>
+
+<script>
+$body = $("body");
+
+
+    $(function () {
+        $(document).on({
+            ajaxStart: function() { $body.addClass("loading");},
+            ajaxStop: function() { $body.removeClass("loading");$('.botao').attr('data-target','#modal2');  $('#modal2').modal('show'); $('.botao').removeAttr('data-target') }
+        });
+        $('button').click(function(){
+            var id = $(this).attr('id').replace('category-', '');
+            $.ajax({
+                //url: "getcategory.json",
+                url : "<?= Router::url(['controller'=>'Categories','action'=>'getcategory', '_ext' => 'json']);?>",
+                dataType: 'json',
+                type: 'post',
+                data: {id:id},
+                error: function() {
+                   console.log('erro')
+                },
+                success: function(data) {
+                    var row = $.parseJSON(data['categoria']);
+                    document.getElementById("nome").setAttribute("value",row[0]['name']);
+                    document.getElementById("id").setAttribute("value",row[0]['id']);
+                    document.getElementById("selecionar").checked = row[0]['selectable'];
+                    var updateform = document.getElementById("formulario");
+                    //updateform.action = 'edit/' + row[0]['id'];
+                    updateform.action = '<?= Router::url('/admin/categories/edit/');?>' + row[0]['id'];
+                    $('#parent-id').html('');
+                    $('#parent-id').append('<option value="">null</option>');
+                    $.each(row['categories'],function(index,value){
+                        if(value['id'] == row[0]['parent_id']){
+                            $('#parent-id').append('<option value="'+value['id']+'" selected>'+value['name']+'</option>');
+                        }
+                        else{
+                            $('#parent-id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+                        }
+                    })
+                    if(row[0]['icon'] != null){
+                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/'+row[0]['icon']);
+                    }
+                    else{
+                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/categories_icon/no_logo.gif');
+                    }
+
+                    //console.log(row['categories']);
+                }
+            })
+        })
+    });
+</script>
