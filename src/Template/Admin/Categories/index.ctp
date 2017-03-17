@@ -1,3 +1,4 @@
+<?php use Cake\Routing\Router; ?>
 <section class="content-header">
       <h1>
         Categorias
@@ -45,7 +46,8 @@
                                 <td></td>';
                         }
                         echo '<td><button type="button" class="btn btn-primary btn-sm botao" data-toggle="modal"  id="category-'.$value['id'].'">Editar</button>&nbsp;
-                              <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" id="category-'.$value['id'].'">Eliminar</button></td>
+                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" id="category-'.$value['id'].'">Eliminar</button>
+                             </td>
                         </tr>';
                     }
                 ?>
@@ -71,12 +73,13 @@
                 <?php
                 //die(debug($user));
                     //,'/admin/categories/edit/'
-		        	echo $this->Form->create('categories',['id'=>'formulario']);
+		        	echo $this->Form->create('categories',['id'=>'formulario','enctype'=>'multipart/form-data']);
                     echo $this->Form->hidden('id', ['value'=>'','id'=>'id']);
                     echo $this->Form->input('name', ['type' => 'text','class'=>'form-control','id'=>'nome']);
-                    //echo $this->Form->input('icon', ['type' => 'file','class'=>'form-control']);
-                    //echo $this->Form->input('parent_id', ['options' => $categorylist,'class'=>'form-control']);
+                    echo $this->Form->input('parent_id', ['class'=>'form-control']);
                     echo $this->Form->checkbox('selectable',['id' =>'selecionar']).'&nbsp;Selectable';
+                    echo $this->Form->input('icon', ['type' => 'file','class'=>'form-control']);
+                    echo $this->Html->image('categories_icon/no_logo.gif',['alt' => 'imagem','height' => 50,'id'=>'imagem-edit']);
                     echo '</div><div class="modal-footer">
                        <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
                        '.$this->Form->button(__('Editar'),['class' => 'btn btn-primary btn-lg','id'=>'update']).'
@@ -108,7 +111,8 @@ $body = $("body");
         $('button').click(function(){
             var id = $(this).attr('id').replace('category-', '');
             $.ajax({
-                url: "getcategory.json",
+                //url: "getcategory.json",
+                url : "<?= Router::url(['controller'=>'Categories','action'=>'getcategory', '_ext' => 'json']);?>",
                 dataType: 'json',
                 type: 'post',
                 data: {id:id},
@@ -120,13 +124,27 @@ $body = $("body");
                     document.getElementById("nome").setAttribute("value",row[0]['name']);
                     document.getElementById("id").setAttribute("value",row[0]['id']);
                     document.getElementById("selecionar").checked = row[0]['selectable'];
-                    //var update = document.getElementById("update");
-                    //update.href = 'categories/edit/' + row[0]['id'];
                     var updateform = document.getElementById("formulario");
-                    updateform.action = 'edit/' + row[0]['id'];
+                    //updateform.action = 'edit/' + row[0]['id'];
+                    updateform.action = '<?= Router::url('/admin/categories/edit/');?>' + row[0]['id'];
+                    $('#parent-id').html('');
+                    $('#parent-id').append('<option value="">null</option>');
+                    $.each(row['categories'],function(index,value){
+                        if(value['id'] == row[0]['parent_id']){
+                            $('#parent-id').append('<option value="'+value['id']+'" selected>'+value['name']+'</option>');
+                        }
+                        else{
+                            $('#parent-id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+                        }
+                    })
+                    if(row[0]['icon'] != null){
+                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/'+row[0]['icon']);
+                    }
+                    else{
+                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/categories_icon/no_logo.gif');
+                    }
 
-
-                    //console.log(row[0]['name']);
+                    //console.log(row['categories']);
                 }
             })
         })

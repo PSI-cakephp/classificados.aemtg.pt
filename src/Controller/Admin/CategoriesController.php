@@ -71,10 +71,24 @@ class CategoriesController extends AppController
     	$category = $this->Categories->get($id);
         if($this->request->is('post'))
         {
-            //die(debug($this->request->data()));
+            $icon = $this->request->data('icon'); //recebe o valor do campo de upload
+            if($icon['name'] != ''){
+                $extension = pathinfo($icon['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
+                $icon['name'] = Text::uuid($icon['name']).'.'.$extension; //transforma o nome em uma string
+
+                move_uploaded_file($icon['tmp_name'], WWW_ROOT . 'img/categories_icon/' . $icon['name']);   //move o ficheiro para a pasta local
+            }
+            else{
+                unset($this->request->data['icon']);
+            }
+
             $entidade = $this->Categories->patchEntity($category,$this->request->data());
+            if($icon['name'] != ''){
+                $category->icon = 'categories_icon/' . $icon['name']; //guarda o nome e caminho do ficheiro na patch entity
+            }
+            die(debug($entidade));
             $this->Categories->save($entidade);
-            $this->redirect(['controller'=>'/categories']);
+            $this->redirect(['controller'=>'/categories/']);
         }
         $this->set('category',$category);
     }
@@ -87,6 +101,7 @@ class CategoriesController extends AppController
         $category = $category->toArray();
         $categories = $categories->toArray();
         $category['categories'] = $categories;
+        //die(debug($category));
         $category = json_encode($category);
 
         $this->set('categoria',$category);
