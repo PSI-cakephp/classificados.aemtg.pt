@@ -9,6 +9,8 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\Validation\Validation;
 use Cake\Auth\DefaultPasswordHasher;
+use Cake\Utility\Text;
+use Cake\I18n\I18n;
 
 
 class UsersController extends AppController
@@ -17,7 +19,10 @@ class UsersController extends AppController
     {
         parent::beforeFilter($event);
         $this->Auth->allow('Register');
+        $user = $this->Auth->user('id');
+
     }
+
 
 	public function Register()
 	{
@@ -25,7 +30,7 @@ class UsersController extends AppController
     	if($this->request->is('post')){
             $user = $this->Users->patchEntity($user, $this->request->data(),['validate' => 'Users']);
             if($this->Users->save($user)){
-            	$this->Flash->success(__('User Saved'));
+                $this->redirect(['controller'=>'users','action' => 'login']);
             }   
             else{
                 $this->Flash->error(__('ERROR: User NOT Saved'));  
@@ -73,5 +78,52 @@ class UsersController extends AppController
             $this->Flash->error(__('Invalid username or password, try again'));
 
         }
+    }
+
+        public function account()
+    {
+        $this->viewBuilder()->layout('account'); 
+        $id = $this->Auth->user('id');
+        $user = $this->Users->get($id);
+        unset($user->password);
+        if (empty($user->profile_picture)) {
+
+            unset($user->profile_picture);
+            unset($this->request->data['profile_picture']);
+        }  
+        //die(debug($user));
+        if ($this->request->is('put')){
+            if (empty($this->request->data('password'))) {
+                
+                unset($this->request->data['password']);
+                //die(debug($this->request->data()));
+            }
+            if (empty($this->request->data('profile_picture'))) {
+                
+                unset($this->request->data['profile_picture']);
+                //die(debug($this->request->data()));
+            }
+            else{
+                $image = $this->request->data('profile_picture');
+                //die(debug($image));
+                $extension = pathinfo($image['name'], PATHINFO_EXTENSION); //obtem a extensao do ficheiro
+                $image['name'] = Text::uuid($image['name']).'.'.$extension; //transforma o nome em uma string
+                //die(debug($image['name']));
+                move_uploaded_file($image['tmp_name'], WWW_ROOT . 'img/users_pic/' . $image['name']);
+
+                $entidade = $this->Users->patchEntity($user,$this->request->data());
+
+                $entidade->profile_picture = 'users_pic/' . $image['name']; //guarda o nome e caminho do ficheiro na patch entity
+                //die(debug($entidade));
+                $this->Users->save($entidade);
+            }
+//die(debug($user));
+
+
+
+
+            //$this->redirect(['controller'=>'products','action' => 'Vender']);
+        }
+        $this->set('user',$user);
     }
 }
