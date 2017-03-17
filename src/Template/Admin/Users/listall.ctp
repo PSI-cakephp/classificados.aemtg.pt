@@ -24,11 +24,14 @@
 	                	<tr>
 	                		<td><?=$user['username']?></td>
 	                		<td><?=$user['email']?></td>
-	                		<td id="status"><?=$user['status']?></td>
+	                		<td class="status-<?=$user['id']?>"><?=$user['status']?></td>
 	                		<td><?=$user['user_type']?></td>
-	                		<td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modal2">Editar</button></td>
-	                		<td><button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">Eliminar</button></td>
-                      <td id="blockbutton">
+	                		<td><?php
+                        echo '<button type="button" class="btn btn-primary btn-sm botao" data-target= "#modal2" data-toggle="modal" id="editar-'.$user['id'].'">Editar</button>'
+                        ?>
+                      </td>
+	                		<td><button type="button" class="btn btn-warning btn-sm botao" data-toggle="modal" data-target="#myModal" >Eliminar</button></td>
+                      <td class="blockbutton button-<?=$user['id']?>">
 	                		<?php if($user['status']=='Ativado')
 		                		{
                           echo '<button type="button" class="btn btn-danger btn-sm bloquear" id="bloquear-'.$user['id'].'" >Bloquear</button>';
@@ -106,19 +109,20 @@
               </div>
               <div class="modal-body">
                 <?php
-		        	echo $this->Form->create($user);
+		        	echo $this->Form->create($user,['id'=>'formulario']);
 		        	echo $this->Form->input('username', ['type' => 'text','class'=>'form-control']);
 		        	echo $this->Form->input('email', ['type' => 'email','class'=>'form-control']);
 		        	echo $this->Form->input('status', ['type' => 'text','class'=>'form-control']);
-		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control']);
-		        	echo $this->Form->end();
-	        	?>
+		        	echo $this->Form->input('user_type', ['type' => 'text','class'=>'form-control','id'=>'user_type']);
+              echo "</div>";
+              echo "<div class='modal-footer'>";
+              echo '<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>';
+              echo $this->form->button(__('Editar'),['class'=>'btn btn-primary btn-lg']);
+              echo $this->Form->end();
+              echo "</div>";
+              ?>
               </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
-                <?=$this->Html->link(__('Editar'),'/admin/users/edit/'.$user['id'],['class' => 'btn btn-primary btn-lg'])?>
-              </div>
-            </div>
+            
             <!-- /.modal-content -->
         </div>
         <!-- /.modal-dialog -->
@@ -149,6 +153,8 @@
 <!-- AdminLTE for demo purposes -->
 <?=$this->Html->script('backend/demo.js')?>
 
+
+
 <script>
   $(function () {
     $("#example1").DataTable();
@@ -162,10 +168,36 @@
     });
   });
 
-    $('#blockbutton').on('click','.ativar',function(){
-      myString = $(this).attr("id");
+    $('button').on('click',function(){
+        var id = $(this).attr('id').replace('editar-', '');
+        $.ajax({
+            url: "getuser.json",
+            dataType: 'json',
+            type: 'post',
+            data: {id:id},
+            error: function() {
+              console.log('erro')
+            },
+            success: function(data) {
+              var row = $.parseJSON(data['user']);
+              console.log(row);
+              document.getElementById("username").setAttribute("value",row[0]['username']);
+              document.getElementById("email").setAttribute("value",row[0]['email']);
+              document.getElementById("status").setAttribute("value",row[0]['status']);
+              document.getElementById("user_type").setAttribute("value",row[0]['user_type']);
+              //var update = document.getElementById("update");
+              //update.href = 'categories/edit/' + row[0]['id'];
+              var updateform = document.getElementById("formulario");
+              updateform.action = 'edit/' + row[0]['id'];
+              
+            }
+        });
+    });
+
+    $('.blockbutton').on('click','.ativar',function(){
+      myString = $(this).attr("id");console.log(myString);
       myString = myString.replace("ativar-",'');
-      console.log(myString);
+      
         $.ajax({
           url: "ativar/"+myString,
           /*data: {
@@ -173,13 +205,13 @@
                 },*/
           success: function()
           {
-            $('#blockbutton').html('<button type="button" class="btn btn-danger btn-sm bloquear" id="bloquear-'+myString+'" >Bloquear</button>');
-            $('#status').html('Bloqueado');
+            $('.button-' + myString).html('<button type="button" class="btn btn-danger btn-sm bloquear" id="bloquear-'+myString+'" >Bloquear</button>');
+            $('.status-' + myString).html('Ativado');
           }
         });
     });
 
-    $('#blockbutton').on('click','.bloquear',function(){
+    $('.blockbutton').on('click','.bloquear',function(){
       myString = $(this).attr("id");
       myString = myString.replace("bloquear-",'');
       console.log(myString);
@@ -190,11 +222,12 @@
                 },*/
           success: function()
           {
-            $('#blockbutton').html('<button type="button" class="btn btn-success btn-sm ativar" id="ativar-'+myString+'">Ativar</button>');
-            $('#status').html('Ativado');
+            $('.button-' + myString).html('<button type="button" class="btn btn-success btn-sm ativar" id="ativar-'+myString+'">Ativar</button>');
+            $('.status-' + myString).html('Bloqueado');
           }
         });
     });
+
 
 </script>
 </body>
