@@ -45,8 +45,8 @@
                                 '<td>&nbsp;&nbsp;'.$value['name'].'</td>
                                 <td></td>';
                         }
-                        echo '<td><button type="button" class="btn btn-primary btn-sm botao" data-toggle="modal"  id="category-'.$value['id'].'">Editar</button>&nbsp;
-                                  <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal" id="category-'.$value['id'].'">Eliminar</button>
+                        echo '<td><button type="button" class="btn btn-primary btn-sm botao editar" data-toggle="modal"  id="edit-'.$value['id'].'">Editar</button>&nbsp;
+                                  <button type="button" class="btn btn-warning btn-sm botao eliminar" data-toggle="modal" id="delete-'.$value['id'].'">Eliminar</button>
                              </td>
                         </tr>';
                     }
@@ -94,6 +94,31 @@
     <!-- /.modal -->
 </div>
 
+<div class="example-modal">
+    <div class="modal modal-danger" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Eliminar categoria</h4>
+              </div>
+              <div class="modal-body">
+                <p>Tem a certeza que quer eliminar esta categoria?</p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fechar</button>
+                <?=$this->Html->link(__('Eliminar'),'/admin/categories',['class' => 'btn btn-danger btn-lg','id'=>'del'])?>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+</div>
+<!-- /.example-modal -->
+
 <?=$this->element('loading')?> <!-- mostra o loading -->
 
 <!-- jQuery 2.2.3 -->
@@ -106,10 +131,17 @@ $body = $("body");
     $(function () {
         $(document).on({
             ajaxStart: function() { $body.addClass("loading");},
-            ajaxStop: function() { $body.removeClass("loading");$('.botao').attr('data-target','#modal2');  $('#modal2').modal('show'); $('.botao').removeAttr('data-target') }
+            ajaxStop: function() { $body.removeClass("loading");}
         });
         $('button').click(function(){
-            var id = $(this).attr('id').replace('category-', '');
+            var id;
+            if($(this).attr('id').includes('edit')){
+                id = $(this).attr('id').replace('edit-', '');
+            }
+            else{
+                id = $(this).attr('id').replace('delete-', '');
+            }
+            var type = $(this).attr('id').replace('-'+id,'');
             $.ajax({
                 //url: "getcategory.json",
                 url : "<?= Router::url(['controller'=>'Categories','action'=>'getcategory', '_ext' => 'json']);?>",
@@ -121,30 +153,35 @@ $body = $("body");
                 },
                 success: function(data) {
                     var row = $.parseJSON(data['categoria']);
-                    document.getElementById("nome").setAttribute("value",row[0]['name']);
-                    document.getElementById("id").setAttribute("value",row[0]['id']);
-                    document.getElementById("selecionar").checked = row[0]['selectable'];
-                    var updateform = document.getElementById("formulario");
-                    //updateform.action = 'edit/' + row[0]['id'];
-                    updateform.action = '<?= Router::url('/admin/categories/edit/');?>' + row[0]['id'];
-                    $('#parent-id').html('');
-                    $('#parent-id').append('<option value="">null</option>');
-                    $.each(row['categories'],function(index,value){
-                        if(value['id'] == row[0]['parent_id']){
-                            $('#parent-id').append('<option value="'+value['id']+'" selected>'+value['name']+'</option>');
+                    if(type == 'edit'){
+                        $('#modal2').modal('show');
+                        document.getElementById("nome").setAttribute("value",row[0]['name']);
+                        document.getElementById("id").setAttribute("value",row[0]['id']);
+                        document.getElementById("selecionar").checked = row[0]['selectable'];
+                        var updateform = document.getElementById("formulario");
+                        //updateform.action = 'edit/' + row[0]['id'];
+                        updateform.action = '<?= Router::url('/admin/categories/edit/');?>' + row[0]['id'];
+                        $('#parent-id').html('');
+                        $('#parent-id').append('<option value="">null</option>');
+                        $.each(row['categories'],function(index,value){
+                            if(value['id'] == row[0]['parent_id']){
+                                $('#parent-id').append('<option value="'+value['id']+'" selected>'+value['name']+'</option>');
+                            }
+                            else{
+                                $('#parent-id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+                            }
+                        })
+                        if(row[0]['icon'] != null){
+                            document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/'+row[0]['icon']);
                         }
                         else{
-                            $('#parent-id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+                            document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/categories_icon/no_logo.gif');
                         }
-                    })
-                    if(row[0]['icon'] != null){
-                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/'+row[0]['icon']);
                     }
                     else{
-                        document.getElementById("imagem-edit").setAttribute("src",'/classificados.aemtg.pt/img/categories_icon/no_logo.gif');
+                        $('#myModal').modal('show');
+                        document.getElementById("del").setAttribute("src",'/classificados.aemtg.pt/admin/categories/delete/'+row[0]['id']);
                     }
-
-                    //console.log(row['categories']);
                 }
             })
         })
